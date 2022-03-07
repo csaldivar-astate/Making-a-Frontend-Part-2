@@ -29,17 +29,7 @@ function removeWord (word) {
     stmt.run({word});
 }
 
-function getRandomWord () {
-    const sql = `SELECT * FROM Dictionary`;
-    const stmt = db.prepare(sql);
-    const record = stmt.get();
-
-    if (!record) {return;}
-
-    return record.word;
-}
-
-function checkWord (word) {
+function isValidWord (word) {
     const sql = `SELECT * FROM Dictionary WHERE word=@word`;
     const stmt = db.prepare(sql);
     const record = stmt.get({"word": word.toLowerCase()});
@@ -53,6 +43,5 @@ module.exports = {
     addWord,
     addManyWords,
     removeWord,
-    getRandomWord,
-    checkWord,
+    isValidWord,
 };
